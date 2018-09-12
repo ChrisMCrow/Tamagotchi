@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>MyTamagotchi</title>
+    <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css'>
+  </head>
+  <body>
+    <div class="container">
+      <h1 class="jumbotron">@Model.GetName()</h1>
+      <div class="row">
+        <div class="col-md-4">
+          <form action="/tamagotchi/@Model.GetId()/feed" method="post">
+            <h2>Food: @Model.GetHunger()</h2>
+            <button type="submit" class="btn btn-warning">Feed</button>
+          </form>
+        </div>
+        <div class="col-md-4">
+          <form action="/tamagotchi/@Model.GetId()/sleep" method="post">
+            <h2>Sleep: @Model.GetSleep()</h2>
+            <button class="btn btn-info">Put to Bed</button>
+        </form>
+        </div>
+        <div class="col-md-4">
+          <form action="/tamagotchi/@Model.GetId()/play" method="post">
+            <h2>Attention: @Model.GetAttention()</h2>
+            <button class="btn btn-success">Play</button>
+        </form>
+        </div>
+      </div>
+      <br>
+      <br>
+      <a href="/tamagotchi"><button class="btn btn-danger">Back to Tamagotchi Park</button></a>
+    </div>
+  </body>
+</html>
