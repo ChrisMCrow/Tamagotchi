@@ -6,15 +6,19 @@ namespace Tamagotchis.Models
     public class Tama
     {
         private string _name;
-        private int _hunger = 5;
-        private int _sleep = 5;
-        private int _attention = 5;
+        private int _hunger;
+        private int _sleep;
+        private int _attention;
         private int _id;
         private static List<Tama> _allTama = new List<Tama> {};
+        public Random stat = new Random();
 
         public Tama(string name)
         {
             _name = name;
+            _hunger = stat.Next(3, 8);
+            _sleep = stat.Next(3, 8);
+            _attention = stat.Next(3, 8);
             _allTama.Add(this);
             _id = _allTama.Count;
         }
@@ -62,7 +66,6 @@ namespace Tamagotchis.Models
         {
             _allTama.Clear();
         }
-
 
 
         public void Feed()
