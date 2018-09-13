@@ -20,14 +20,14 @@
             <h2>Sleep: @Model.GetSleep()</h2>
             <button class="btn btn-info">Make Sleep</button><br>
             <p>+sleep, -energy</p>
-        </form>
+          </form>
         </div>
         <div class="col-md-4">
           <form action="/tamagotchi/@Model.GetId()/play" method="post">
             <h2>Attention: @Model.GetAttention()</h2>
             <button class="btn btn-success">Play</button>
             <p>+attention, -energy, -sleep</p><br>
-        </form>
+          </form>
         </div>
       </div>
       <h2>Food Available: @Model.GetFood()</h2>

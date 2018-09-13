@@ -10,7 +10,7 @@ namespace Tamagotchis.Controllers
         [HttpGet("/tamagotchi")]
         public ActionResult Index()
         {
-          List<Tama> allTama = Tama.GetAll();
+            List<Tama> allTama = Tama.GetAll();
             return View(allTama);
         }
 
@@ -44,7 +44,7 @@ namespace Tamagotchis.Controllers
             List<Tama> allTama = Tama.GetAll();
             tamagotchi.Feed();
             Tama.CheckForDead();
-            return tamagotchi.IsDead() ? Index() : View("Details", tamagotchi);
+            return tamagotchi.IsDead() ? View("Index", allTama) : View("Details", tamagotchi);
         }
 
         [HttpPost("/tamagotchi/{id}/sleep")]
@@ -54,7 +54,7 @@ namespace Tamagotchis.Controllers
             List<Tama> allTama = Tama.GetAll();
             tamagotchi.MakeSleep();
             Tama.CheckForDead();
-            return tamagotchi.IsDead() ? Index() : View("Details", tamagotchi);
+            return tamagotchi.IsDead() ? View("Index", allTama) : View("Details", tamagotchi);
         }
 
         [HttpPost("/tamagotchi/{id}/play")]
@@ -64,7 +64,7 @@ namespace Tamagotchis.Controllers
             List<Tama> allTama = Tama.GetAll();
             tamagotchi.Play();
             Tama.CheckForDead();
-            return tamagotchi.IsDead() ? Index() : View("Details", tamagotchi);
+            return tamagotchi.IsDead() ? View("Index", allTama) : View("Details", tamagotchi);
         }
 
         [HttpPost("/time")]
