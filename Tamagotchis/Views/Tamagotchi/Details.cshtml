@@ -6,27 +6,31 @@
   </head>
   <body>
     <div class="container">
-      <h1 class="jumbotron">@Model.GetName()</h1>
+      <h1 class="jumbotron"><img src='https://randompokemongenerator.com/img/sprites/@Model.GetImg()'> @Model.GetName()</h1>
       <div class="row">
         <div class="col-md-4">
           <form action="/tamagotchi/@Model.GetId()/feed" method="post">
-            <h2>Food: @Model.GetHunger()</h2>
-            <button type="submit" class="btn btn-warning">Feed</button>
+            <h2>Energy: @Model.GetHunger()</h2>
+            <button type="submit" class="btn btn-warning">Feed</button><br>
+            <p>+energy, -food</p>
           </form>
         </div>
         <div class="col-md-4">
           <form action="/tamagotchi/@Model.GetId()/sleep" method="post">
             <h2>Sleep: @Model.GetSleep()</h2>
-            <button class="btn btn-info">Put to Bed</button>
+            <button class="btn btn-info">Make Sleep</button><br>
+            <p>+sleep, -energy</p>
         </form>
         </div>
         <div class="col-md-4">
           <form action="/tamagotchi/@Model.GetId()/play" method="post">
             <h2>Attention: @Model.GetAttention()</h2>
             <button class="btn btn-success">Play</button>
+            <p>+attention, -energy, -sleep</p><br>
         </form>
         </div>
       </div>
+      <h2>Food Available: @Model.GetFood()</h2>
       <br>
       <br>
       <a href="/tamagotchi"><button class="btn btn-danger">Back to Tamagotchi Park</button></a>

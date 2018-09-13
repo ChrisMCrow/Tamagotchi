@@ -11,13 +11,37 @@
       <h1 class="jumbotron">Tamagotchi Park</h1>
       @foreach(Tama egg in Model)
       {
-        <h3><a href='tamagotchi/@egg.GetId()'>@egg.GetName() - Food: @egg.GetHunger(), Sleep: @egg.GetSleep(), Attention: @egg.GetAttention()</a></h3>
+        if(@egg.IsDead())
+        {
+          <img src="https://cdn3.iconfinder.com/data/icons/halloween-29/64/grave-512.png" width=120 height=120 style="float: left">
+          <h3>@egg.GetName()</h3>
+          <h4>Dead</h4>
+          <br><br><br>
+        }
+        else
+        {
+          <a href='tamagotchi/@egg.GetId()'>
+          <img src='https://randompokemongenerator.com/img/sprites/@egg.GetImg()' style="float: left">
+          <h3>@egg.GetName()</h3></a>
+          <h4>Energy: @egg.GetHunger(), Sleep: @egg.GetSleep(), Attention: @egg.GetAttention()</h4>
+          <h4>Food Available: @egg.GetFood()</h4>
+          <br><br>
+        }
       }
-      <a href='/tamagotchi/new'><button class='btn btn-info'>Hatch a new Tamagotchi!</button></a>
-      <br><br>
       <form action='/time' method='post'>
-        <button type="submit" class="btn btn-primary">+ Time</button>
+          <button type="submit" class="btn btn-primary">Time</button>
+          <br>
+          <p>+2 food, -1 energy, -1 sleep, -1 attention</p>
       </form>
+      <br>
+      <a href='/tamagotchi/new'><button class='btn btn-success'>Hatch a new Tamagotchi!</button></a>
+      <br>
+      <p>+Time</p>
+      <br>
+      <form action='/delete' method='post'>
+        <button type="submit" class="btn btn-danger">Start Over</button>
+      </form>
+      <br><br><br>
     </div>
   </body>
 </html>

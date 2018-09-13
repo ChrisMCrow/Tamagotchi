@@ -25,6 +25,8 @@ namespace Tamagotchis.Controllers
         {
             Tama newTama = new Tama(Request.Form["name"]);
             List<Tama> allTama = Tama.GetAll();
+            Tama.Time();
+            Tama.CheckForDead();
             return View("Index", allTama);
         }
 
@@ -39,33 +41,47 @@ namespace Tamagotchis.Controllers
         public ActionResult CreateFeed(int id)
         {
             Tama tamagotchi = Tama.Find(id);
+            List<Tama> allTama = Tama.GetAll();
             tamagotchi.Feed();
-            return View("Details", tamagotchi);
+            Tama.CheckForDead();
+            return tamagotchi.IsDead() ? Index() : View("Details", tamagotchi);
         }
 
         [HttpPost("/tamagotchi/{id}/sleep")]
         public ActionResult CreateSleep(int id)
         {
-          Tama tamagotchi = Tama.Find(id);
-          tamagotchi.MakeSleep();
-          return View("Details", tamagotchi);
+            Tama tamagotchi = Tama.Find(id);
+            List<Tama> allTama = Tama.GetAll();
+            tamagotchi.MakeSleep();
+            Tama.CheckForDead();
+            return tamagotchi.IsDead() ? Index() : View("Details", tamagotchi);
         }
 
         [HttpPost("/tamagotchi/{id}/play")]
         public ActionResult CreateAttention(int id)
         {
-          Tama tamagotchi = Tama.Find(id);
-          tamagotchi.Play();
-          return View("Details", tamagotchi);
+            Tama tamagotchi = Tama.Find(id);
+            List<Tama> allTama = Tama.GetAll();
+            tamagotchi.Play();
+            Tama.CheckForDead();
+            return tamagotchi.IsDead() ? Index() : View("Details", tamagotchi);
         }
 
         [HttpPost("/time")]
         public ActionResult AddTime()
         {
-          Tama.Time();
-          Tama.ClearDeadTama();
-          List<Tama> allTama = Tama.GetAll();
-          return View("Index", allTama);
+            Tama.Time();
+            Tama.CheckForDead();
+            List<Tama> allTama = Tama.GetAll();
+            return View("Index", allTama);
+        }
+
+        [HttpPost("/delete")]
+        public ActionResult Delete()
+        {
+            Tama.ClearAll();
+            List<Tama> allTama = Tama.GetAll();
+            return View("Index", allTama);
         }
     }
 }
